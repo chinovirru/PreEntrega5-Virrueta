@@ -1,0 +1,26 @@
+{
+  "name": "preentrega4-virrueta",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ProductManager.js",
+  "type": "module",
+  "scripts": {
+    "test": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chinovirru/PreEntrega4-Virrueta.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chinovirru/PreEntrega3-Virrueta/issues"
+  },
+  "homepage": "https://github.com/chinovirru/PreEntrega3-Virrueta#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
