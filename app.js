@@ -15,7 +15,6 @@ app.engine('handlebars', engine())
 app.set('views', './views')
 app.set('view engine', 'handlebars')
 
-// app.use('/static', express.static('public'))
 app.use(express.static('public'))
 
 app.use('/api/products', productsRoutes)
@@ -38,28 +37,27 @@ serverIo.on('connection', socket => {
 
     socket.on('nuevoProducto', async (newProd) => {
         const productManager = new ProductManager('./src/data/products.json')
-        // try {
-        //     const product = await productManager.addProduct(
-        //         newProd.title,
-        //         newProd.description,
-        //         newProd.code,
-        //         newProd.price,
-        //         newProd.status,
-        //         newProd.stock,
-        //         newProd.category,
-        //         newProd.thumbnail)        
-        // } catch (error) {
-        //     console.log(error)
-        // }
+        try {
+            const product = await productManager.addProduct(
+                newProd.title,
+                newProd.description,
+                newProd.code,
+                newProd.price,
+                newProd.status,
+                newProd.stock,
+                newProd.category,
+                newProd.thumbnail)        
+        } catch (error) {
+            console.log(error)
+        }
 
-        const productoss = await productManager.getProducts()
-        console.log(productoss)
         serverIo.sockets.emit('actualizar', await productManager.getProducts())
     })
 
-    socket.on('msgCli', data => {
-        console.log(data)
-    })
+    socket.on('quitarProducto', async(id) => {
+        const productManager = new ProductManager('./src/data/products.json')
+        await productManager.removeProduct(parseInt(id))
 
-    serverIo.sockets.emit('mensaje', 'Hola como estas??')
+        serverIo.sockets.emit('actualizar', await productManager.getProducts())
+    })
 })

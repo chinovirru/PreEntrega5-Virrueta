@@ -1,18 +1,16 @@
 const socket = io()
 
 socket.on('actualizar', products => {
-    const divProducts = document.getElementById('products')
-    divProducts.innerHTML = cargarProductosActuales(products)
+    let divProducts = document.getElementById('products')
+    divProducts.innerHTML=''
+    for (const product of products) {
+        const divProduct = renderProducto(product)
+        divProducts.appendChild(divProduct)
+    }
 })
 
 socket.emit('recibirProductos')
-
         
-// socket.on('mensaje', data => {
-//     console.log(data)
-//     socket.emit('msgCli', 'bien y vos?')
-// })
-
 function agregarPorSocket() {
     const product = {
         title: document.querySelector('#title').value,
@@ -24,20 +22,22 @@ function agregarPorSocket() {
         category: document.querySelector('#category').value
     }
     socket.emit('nuevoProducto', product)
-    console.log('Se envio formulario')
     limpiarInputsAdd()
-    socket.emit('recibirProductos')
 }
 
-async function cargarProductosActuales(products) {
-    console.log("Se carga los productos", JSON.stringify(products))
-    // let listaProductos = products.map(product => {
-    //     return `<h2>${product.title}</h2>
-    //     <ul>${product.title}</ul>
-    //     <ul>${product.description}</ul>
-    //     <ul>${product.price}</ul>
-    //     <ul>${product.category}</ul>`
-    // })
+function renderProducto(product) {
+
+    let div = document.createElement("div")
+    div.innerHTML = `<h2>Titulo: ${product.title}</h2>
+        <ul>Id: ${product.id}</ul>
+        <ul>Descripcion: ${product.description}</ul>
+        <ul>Codigo: ${product.code}</ul>
+        <ul>Precio: ${product.price}</ul>
+        <ul>Stock: ${product.stock}</ul>
+        <ul>Estado: ${product.status}</ul>
+        <ul>Categoria: ${product.category}</ul>`
+    
+    return div
 }
 
 function limpiarInputsAdd() {
@@ -47,12 +47,12 @@ function limpiarInputsAdd() {
     document.querySelector('#price').value = ''
     document.querySelector('#stock').value = ''
     document.querySelector('#category').value = ''
-    console.log("Se limpio los input")
 }
 
 function quitarPorSocket() {
     const id = document.querySelector('#id').value
     socket.emit('quitarProducto', id)
+    limpiarInputRemove()
 
 }
 
