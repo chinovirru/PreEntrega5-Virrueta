@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Productos RealTime</title>
+</head>
+<body>
+    <h1>Listado de Productos</h1>
+    <div id="products">
+
+    </div>
+    <h3>Agregar Nuevo Producto</h3>
+    <label>Titulo</label>
+    <input id="title">
+    <label>Descripcion</label>
+    <input id="description">
+    <label>Codigo</label>
+    <input id="code">
+    <label>Precio</label>
+    <input id="price">
+    <label>Stock</label>
+    <input id="stock">
+    <label>Categoria</label>
+    <input id="category">
+    <br>
+
+    <button type="button" onclick="agregarPorSocket()">Enviar</button>
+
+    <h3>Quitar Producto</h3>
+    <label>Id</label>
+    <input id="id">
+    <br>
+
+    <button type="button" onclick="quitarPorSocket()">Enviar</button>
+
+
+
+    <script src="js/realtimeproducts.js"></script>
+    <script>
+        
+    </script>
+</body>
+</html>
