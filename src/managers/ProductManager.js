@@ -52,15 +52,6 @@ class ProductManager {
         }
     }
 
-    // generateId(list) {
-    //     if (list.length === 0) {
-    //         return 1
-    //     }
-
-    //     let id = Math.max(...list.map(item => item.id))
-    //     return id+1
-    // }
-
     async updateProduct(id, title, description, code, price, status, stock, category, thumbnail) {
         const products = JSON.parse(await readFile(this.path, 'utf-8'))
         const index = products.findIndex(product => product.id === id)
